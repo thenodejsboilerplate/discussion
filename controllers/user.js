@@ -144,13 +144,13 @@ exports.setting = function (req, res, next) {
     var old_pass = validator.trim(req.body.old_pass);
     var new_pass = validator.trim(req.body.new_pass);
     if (!old_pass || !new_pass) {
-      return res.send('旧密码或新密码不得为空');
+      return res.send('Blank old or new password!');
     }
 
     User.getUserById(req.session.user._id, ep.done(function (user) {
       tools.bcompare(old_pass, user.pass, ep.done(function (bool) {
         if (!bool) {
-          return showMessage('当前密码不正确。', user);
+          return showMessage('Wrong password!', user);
         }
 
         tools.bhash(new_pass, ep.done(function (passhash) {
@@ -159,7 +159,7 @@ exports.setting = function (req, res, next) {
             if (err) {
               return next(err);
             }
-            return showMessage('密码已被修改。', user, true);
+            return showMessage('The password has been modified!', user, true);
 
           });
         }));
