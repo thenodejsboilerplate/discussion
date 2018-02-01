@@ -18,22 +18,22 @@ var create = function (req, res, next) {
   var str = validator.trim(content);
   if (str === '') {
     res.status(400);
-    return res.send({success: false, error_msg: '回复内容不能为空'});
+    return res.send({success: false, error_msg: 'The replied content couldn\'t be blank!'});
   }
 
   if (!validator.isMongoId(topic_id)) {
     res.status(400);
-    return res.send({success: false, error_msg: '不是有效的话题id'});
+    return res.send({success: false, error_msg: 'It\'s a valid topid id!'});
   }
   
   Topic.getTopic(topic_id, ep.done(function (topic) {
     if (!topic) {
       res.status(404);
-      return res.send({success: false, error_msg: '话题不存在'});
+      return res.send({success: false, error_msg: 'The topic doesn\'t exist!'});
     }
     if (topic.lock) {
       res.status(403);
-      return res.send({success: false, error_msg: '该话题已被锁定'});
+      return res.send({success: false, error_msg: 'The topic has been locked!'});
     }
     ep.emit('topic', topic);
   }));
@@ -83,7 +83,7 @@ var ups = function (req, res, next) {
 
   if (!validator.isMongoId(replyId)) {
     res.status(400);
-    return res.send({success: false, error_msg: '不是有效的评论id'});
+    return res.send({success: false, error_msg: 'It\'s not a valid topic id!'});
   }
   
   Reply.getReplyById(replyId, function (err, reply) {
@@ -92,11 +92,11 @@ var ups = function (req, res, next) {
     }
     if (!reply) {
       res.status(404);
-      return res.send({success: false, error_msg: '评论不存在'});
+      return res.send({success: false, error_msg: 'The review does\'t exist!'});
     }
     if (reply.author_id.equals(userId) && !config.debug) {
       res.status(403);
-      return res.send({success: false, error_msg: '不能帮自己点赞'});
+      return res.send({success: false, error_msg: 'You cann\'t start yourself!'});
     } else {
       var action;
       reply.ups = reply.ups || [];

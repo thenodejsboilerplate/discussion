@@ -107,7 +107,7 @@ exports.setting = function (req, res, next) {
       url: data.url,
       location: data.location,
       signature: data.signature,
-      weibo: data.weibo,
+      twitter: data.twitter,
       accessToken: data.accessToken,
     };
     if (isSuccess) {
@@ -121,16 +121,16 @@ exports.setting = function (req, res, next) {
   // post
   var action = req.body.action;
   if (action === 'change_setting') {
-    var url = validator.trim(req.body.url);
+    //var url = validator.trim(req.body.url);
     var location = validator.trim(req.body.location);
-    var weibo = validator.trim(req.body.weibo);
+    var twitter = validator.trim(req.body.twitter);
     var signature = validator.trim(req.body.signature);
 
     User.getUserById(req.session.user._id, ep.done(function (user) {
-      user.url = url;
+      //user.url = url;
       user.location = location;
       user.signature = signature;
-      user.weibo = weibo;
+      user.twitter = twitter;
       user.save(function (err) {
         if (err) {
           return next(err);
@@ -231,14 +231,14 @@ exports.listCollectedTopics = function (req, res, next) {
 };
 
 exports.top100 = function (req, res, next) {
-  var opt = {limit: 100, sort: '-score'};
+  var opt = {limit: 10, sort: '-score'};
   User.getUsersByQuery({is_block: false}, opt, function (err, tops) {
     if (err) {
       return next(err);
     }
     res.render('user/top100', {
       users: tops,
-      pageTitle: 'top100',
+      pageTitle: 'top10',
     });
   });
 };

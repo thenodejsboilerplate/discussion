@@ -34,12 +34,12 @@ describe('test/controllers/user.test.js', function () {
       request.get('/user/' + testUser.loginname)
       .expect(200, function (err, res) {
         var texts = [
-          '注册时间',
-          '这家伙很懒，什么个性签名都没有留下。',
-          '最近创建的话题',
-          '无话题',
-          '最近参与的话题',
-          '无话题'
+          'Regester @',
+          'I am lazy...',
+          'Recent created topic',
+          'No topic',
+          'Recent involved topic',
+          'No topic'
         ];
         texts.forEach(function (text) {
           res.text.should.containEql(text);
@@ -53,7 +53,7 @@ describe('test/controllers/user.test.js', function () {
     it('should show star uses', function (done) {
       request.get('/stars')
       .expect(200, function (err, res) {
-        res.text.should.containEql('社区达人');
+        res.text.should.containEql('Elite');
         done(err);
       });
     });

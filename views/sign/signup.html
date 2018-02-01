@@ -4,8 +4,8 @@
   <div class='panel'>
     <div class='header'>
       <ul class='breadcrumb'>
-        <li><a href='/'>主页</a><span class='divider'>/</span></li>
-        <li class='active'>注册</li>
+        <li><a href='/'>Home</a><span class='divider'>/</span></li>
+        <li class='active'>Sign Up</li>
       </ul>
     </div>
     <div class='inner'>
@@ -22,7 +22,7 @@
       <% } else { %>
       <form id='signup_form' class='form-horizontal' action='/signup' method='post'>
         <div class='control-group'>
-          <label class='control-label' for='loginname'>用户名</label>
+          <label class='control-label' for='loginname'>Username</label>
 
           <div class='controls'>
             <% if (typeof(loginname) !== 'undefined') { %>
@@ -33,21 +33,21 @@
           </div>
         </div>
         <div class='control-group'>
-          <label class='control-label' for='pass'>密码</label>
+          <label class='control-label' for='pass'>Password</label>
 
           <div class='controls'>
             <input class='input-xlarge' id='pass' name='pass' size='30' type='password'/>
           </div>
         </div>
         <div class='control-group'>
-          <label class='control-label' for='re_pass'>确认密码</label>
+          <label class='control-label' for='re_pass'>Confirm Password</label>
 
           <div class='controls'>
             <input class='input-xlarge' id='re_pass' name='re_pass' size='30' type='password'/>
           </div>
         </div>
         <div class='control-group'>
-          <label class='control-label' for='email'>电子邮箱</label>
+          <label class='control-label' for='email'>Email</label>
 
           <div class='controls'>
             <% if (typeof(email) !== 'undefined') { %>
@@ -60,12 +60,12 @@
         <input type='hidden' name='_csrf' value='<%= csrf %>'/>
 
         <div class='form-actions'>
-          <input type='submit' class='span-primary' value='注册'/>
-          <a href="/auth/github">
+          <input type='submit' class='span-primary' value='Submit'/>
+          <!-- <a href="/auth/github">
             <span class="span-info">
               通过 GitHub 登录
             </span>
-          </a>
+          </a> -->
         </div>
       </form>
       <% } %>

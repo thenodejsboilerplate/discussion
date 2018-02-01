@@ -39,7 +39,7 @@ exports.index = function (req, res, next) {
   var currentUser = req.session.user;
 
   if (topic_id.length !== 24) {
-    return res.render404('此话题不存在或已被删除。');
+    return res.render404('This topic doesn\'t exist or is deleted.');
   }
   var events = ['topic', 'other_topics', 'no_reply_topics', 'is_collect'];
   var ep = EventProxy.create(events,
@@ -131,13 +131,13 @@ exports.put = function (req, res, next) {
   // 验证
   var editError;
   if (title === '') {
-    editError = '标题不能是空的。';
+    editError = 'Blank Title';
   } else if (title.length < 5 || title.length > 100) {
-    editError = '标题字数太多或太少。';
+    editError = 'Too few or many characters.';
   } else if (!tab || allTabs.indexOf(tab) === -1) {
-    editError = '必须选择一个版块。';
+    editError = 'Choose a category.';
   } else if (content === '') {
-    editError = '内容不可为空';
+    editError = 'Blank fields';
   }
   // END 验证
 
@@ -180,7 +180,7 @@ exports.showEdit = function (req, res, next) {
 
   Topic.getTopicById(topic_id, function (err, topic, tags) {
     if (!topic) {
-      res.render404('此话题不存在或已被删除。');
+      res.render404('This topic doesn\'t exist or has been deleted.');
       return;
     }
 
@@ -194,7 +194,7 @@ exports.showEdit = function (req, res, next) {
         tabs: config.tabs
       });
     } else {
-      res.renderError('对不起，你不能编辑此话题。', 403);
+      res.renderError('Sorry, you couldn\'t edit this topic', 403);
     }
   });
 };
@@ -207,7 +207,7 @@ exports.update = function (req, res, next) {
 
   Topic.getTopicById(topic_id, function (err, topic, tags) {
     if (!topic) {
-      res.render404('此话题不存在或已被删除。');
+      res.render404('This topic doesn\'t exist or has been deleted.');
       return;
     }
 
@@ -219,11 +219,11 @@ exports.update = function (req, res, next) {
       // 验证
       var editError;
       if (title === '') {
-        editError = '标题不能是空的。';
+        editError = 'Title couldn\'t be blank.';
       } else if (title.length < 5 || title.length > 100) {
-        editError = '标题字数太多或太少。';
+        editError = 'Too few or many charaters.';
       } else if (!tab) {
-        editError = '必须选择一个版块。';
+        editError = 'Choose a category.';
       }
       // END 验证
 
@@ -254,7 +254,7 @@ exports.update = function (req, res, next) {
 
       });
     } else {
-      res.renderError('对不起，你不能编辑此话题。', 403);
+      res.renderError('Sorry, you couldn\'t edit this topic.', 403);
     }
   });
 };
@@ -272,11 +272,11 @@ exports.delete = function (req, res, next) {
     }
     if (!req.session.user.is_admin && !(topic.author_id.equals(req.session.user._id))) {
       res.status(403);
-      return res.send({success: false, message: '无权限'});
+      return res.send({success: false, message: 'Permission denied'});
     }
     if (!topic) {
       res.status(422);
-      return res.send({ success: false, message: '此话题不存在或已被删除。' });
+      return res.send({ success: false, message: 'This topic doesn\'t exist or has been deleted.' });
     }
     author.score -= 5;
     author.topic_count -= 1;
@@ -287,7 +287,7 @@ exports.delete = function (req, res, next) {
       if (err) {
         return res.send({ success: false, message: err.message });
       }
-      res.send({ success: true, message: '话题已被删除。' });
+      res.send({ success: true, message: 'The topic has been deleted.' });
     });
   });
 };
@@ -298,7 +298,7 @@ exports.top = function (req, res, next) {
   var referer  = req.get('referer');
 
   if (topic_id.length !== 24) {
-    res.render404('此话题不存在或已被删除。');
+    res.render404('This topic doesn\'t exist or has been deleted.');
     return;
   }
   Topic.getTopic(topic_id, function (err, topic) {
@@ -306,7 +306,7 @@ exports.top = function (req, res, next) {
       return next(err);
     }
     if (!topic) {
-      res.render404('此话题不存在或已被删除。');
+      res.render404('This topic doesn\'t exist or has been deleted.');
       return;
     }
     topic.top = !topic.top;
@@ -314,7 +314,7 @@ exports.top = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      var msg = topic.top ? '此话题已置顶。' : '此话题已取消置顶。';
+      var msg = topic.top ? 'This topic has been topped!' : 'This topic has been untopped!';
       res.render('notify/notify', {success: msg, referer: referer});
     });
   });
@@ -330,7 +330,7 @@ exports.good = function (req, res, next) {
       return next(err);
     }
     if (!topic) {
-      res.render404('此话题不存在或已被删除。');
+      res.render404('This topic doesn\'t exist or has been deleted.');
       return;
     }
     topic.good = !topic.good;
@@ -338,7 +338,7 @@ exports.good = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      var msg = topic.good ? '此话题已加精。' : '此话题已取消加精。';
+      var msg = topic.good ? 'This topic has been defined Great!' : 'This topic has been undefined Great!';
       res.render('notify/notify', {success: msg, referer: referer});
     });
   });
@@ -353,7 +353,7 @@ exports.lock = function (req, res, next) {
       return next(err);
     }
     if (!topic) {
-      res.render404('此话题不存在或已被删除。');
+      res.render404('This topic doesn\'t exist or has been deleted.');
       return;
     }
     topic.lock = !topic.lock;
@@ -361,7 +361,7 @@ exports.lock = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      var msg = topic.lock ? '此话题已锁定。' : '此话题已取消锁定。';
+      var msg = topic.lock ? 'This topic has been locked!' : 'This topic has been unlocked!';
       res.render('notify/notify', {success: msg, referer: referer});
     });
   });

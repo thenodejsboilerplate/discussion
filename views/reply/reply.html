@@ -7,17 +7,17 @@
 
     <div class='user_info'>
       <a class='dark reply_author' href="/user/<%= reply.author.loginname %>"><%= reply.author.loginname %></a>
-      <a class="reply_time" href="#<%= reply._id %>"><%= indexInCollection + 1 %>楼•<%= reply.create_at_ago()
+      <a class="reply_time" href="#<%= reply._id %>"><%= indexInCollection + 1 %>Floor(s)•<%= reply.create_at_ago()
         %></a>
       <% if(reply.author.loginname == topic.author.loginname){ %>
-        <span class="reply_by_author">作者</span>
+        <span class="reply_by_author">Author</span>
       <% } %>
     </div>
     <div class='user_action'>
       <span>
         <i class="fa up_btn
           <%= (current_user && is_uped(current_user, reply)) ? 'fa-thumbs-up uped' : 'fa-thumbs-o-up' %>
-          <%= (!reply.ups || !reply.ups.length) ? 'invisible' : '' %>" title="喜欢"></i>
+          <%= (!reply.ups || !reply.ups.length) ? 'invisible' : '' %>" title="Like"></i>
         <span class="up-count">
           <%= reply.ups && reply.ups.length ? reply.ups.length : '' %>
         </span>
@@ -26,15 +26,15 @@
       (current_user && current_user._id.toString() == reply.author._id.toString())
       ) { %>
       <a href='/reply/<%= reply._id %>/edit' class='edit_reply_btn'>
-        <i class="fa fa-pencil-square-o" title='编辑'></i>
+        <i class="fa fa-pencil-square-o" title='Edit'></i>
       </a>
       <a href='javascript:void(0);' class='delete_reply_btn'>
-        <i class="fa fa-trash" title='删除'></i>
+        <i class="fa fa-trash" title='Delete'></i>
       </a>
       <% } %>
       <span>
         <% if (current_user){ %>
-          <i class="fa fa-reply reply2_btn" title="回复"></i>
+          <i class="fa fa-reply reply2_btn" title="Reply"></i>
         <% } %>
       </span>
     </div>
@@ -56,7 +56,7 @@
 
             <div class='editor_buttons'>
               <input class='span-primary reply2_submit_btn submit_btn'
-                     type="submit" data-id='<%= reply._id %>' data-loading-text="回复中.." value="回复">
+                     type="submit" data-id='<%= reply._id %>' data-loading-text="Replying.." value="Reply">
             </div>
           </div>
 

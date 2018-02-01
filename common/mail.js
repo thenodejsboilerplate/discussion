@@ -44,12 +44,12 @@ exports.sendMail = sendMail;
 exports.sendActiveMail = function (who, token, name) {
   var from    = util.format('%s <%s>', config.name, config.mail_opts.auth.user);
   var to      = who;
-  var subject = config.name + '社区帐号激活';
-  var html    = '<p>您好：' + name + '</p>' +
-    '<p>我们收到您在' + config.name + '社区的注册信息，请点击下面的链接来激活帐户：</p>' +
-    '<a href  = "' + SITE_ROOT_URL + '/active_account?key=' + token + '&name=' + name + '">激活链接</a>' +
-    '<p>若您没有在' + config.name + '社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p>' +
-    '<p>' + config.name + '社区 谨上。</p>';
+  var subject = config.name + ' activate your account';
+  var html    = '<p>Hello: ' + name + '</p>' +
+    '<p>We have got' + ' your registeration，please click the link below to activate: </p>' +
+    '<a href  = "' + SITE_ROOT_URL + '/active_account?key=' + token + '&name=' + name + '">Activating Link</a>' +
+    '<p>If you have not made an account at ' + config.name + ', that means someone is using your email. Please delete this email and sorry for interuppting you.</p>' +
+    '<p>' + config.name + ' Honestly</p>';
 
   exports.sendMail({
     from: from,
@@ -68,12 +68,12 @@ exports.sendActiveMail = function (who, token, name) {
 exports.sendResetPassMail = function (who, token, name) {
   var from = util.format('%s <%s>', config.name, config.mail_opts.auth.user);
   var to = who;
-  var subject = config.name + '社区密码重置';
-  var html = '<p>您好：' + name + '</p>' +
-    '<p>我们收到您在' + config.name + '社区重置密码的请求，请在24小时内单击下面的链接来重置密码：</p>' +
-    '<a href="' + SITE_ROOT_URL + '/reset_pass?key=' + token + '&name=' + name + '">重置密码链接</a>' +
-    '<p>若您没有在' + config.name + '社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p>' +
-    '<p>' + config.name + '社区 谨上。</p>';
+  var subject = config.name + 'Reset Password';
+  var html = '<p>Hello: ' + name + '</p>' +
+    '<p>We have received your request at ' + config.name + 'for password resetting.Please click the link in 24 hours to modify your password:</p>' +
+    '<a href="' + SITE_ROOT_URL + '/reset_pass?key=' + token + '&name=' + name + '">Reset Password Link</a>' +
+    '<p>If you have not made a request at ' + config.name + ', that means someone is using your email. Please delete this email and sorry for interuppting you.</p>' +
+    '<p>' + config.name + ' Honestly</p>';
 
   exports.sendMail({
     from: from,

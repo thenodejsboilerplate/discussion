@@ -13,11 +13,11 @@ var auth = function (req, res, next) {
   UserModel.findOne({accessToken: accessToken}, ep.done(function (user) {
     if (!user) {
       res.status(401);
-      return res.send({success: false, error_msg: '错误的accessToken'});
+      return res.send({success: false, error_msg: 'Wrong accessToken'});
     }
     if (user.is_block) {
       res.status(403);
-      return res.send({success: false, error_msg: '您的账户被禁用'});
+      return res.send({success: false, error_msg: 'Your account has been banned!'});
     }
     req.user = user;
     next();
@@ -41,7 +41,7 @@ var tryAuth = function (req, res, next) {
     }
     if (user.is_block) {
       res.status(403);
-      return res.send({success: false, error_msg: '您的账户被禁用'});
+      return res.send({success: false, error_msg: 'Your account has been banned!'});
     }
     req.user = user;
     next();

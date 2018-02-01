@@ -10,20 +10,20 @@ var config = {
 
   get mini_assets() { return !this.debug; }, // 是否启用静态文件的合并压缩，详见视图中的Loader
 
-  name: 'Nodeclub', // 社区名字
-  description: 'CNode：Node.js专业中文社区', // 社区的描述
-  keywords: 'nodejs, node, express, connect, socket.io',
+  name: '2HOURS', // 社区名字
+  description: 'Exclusive Place for expatriates in China', // 社区的描述
+  keywords: 'expatriates, foreigner, English teacher',
 
   // 添加到 html head 中的信息
   site_headers: [
-    '<meta name="author" content="EDP@TAOBAO" />'
+    '<meta name="author" content="Frank Lee" />'
   ],
   site_logo: '/public/images/cnodejs_light.svg', // default is `name`
   site_icon: '/public/images/cnode_icon_32.png', // 默认没有 favicon, 这里填写网址
   // 右上角的导航区
   site_navs: [
     // 格式 [ path, title, [target=''] ]
-    [ '/about', '关于' ]
+    [ '/about', 'about' ]
   ],
   // cdn host，如 http://cnodejs.qiniudn.com
   site_static_host: '', // 静态文件存储域名
@@ -35,7 +35,7 @@ var config = {
   cnzz_tracker_id: '',
 
   // mongodb 配置
-  db: 'mongodb://127.0.0.1/node_club_dev',
+  db: 'mongodb://127.0.0.1/2hours',
 
   // redis 配置，默认是本地
   redis_host: '127.0.0.1',
@@ -54,10 +54,10 @@ var config = {
 
   // RSS配置
   rss: {
-    title: 'CNode：Node.js专业中文社区',
-    link: 'http://cnodejs.org',
-    language: 'zh-cn',
-    description: 'CNode：Node.js专业中文社区',
+    title: '2HOURS.CC: Exclusive Space for expatriates in China',
+    link: 'http://2hours.cc',
+    language: 'en',
+    description: '2HOURS.CC: Exclusive Space for expatriates in China',
     //最多获取的RSS Item数量
     max_rss_items: 50
   },
@@ -66,11 +66,12 @@ var config = {
 
   // 邮箱配置
   mail_opts: {
-    host: 'smtp.126.com',
+    host: 'smtp.163.com',
     port: 25,
+    //secure: true,
     auth: {
-      user: 'club@126.com',
-      pass: 'club'
+      user: 'dongwenedu@163.com',
+      pass: '548331198'
     },
     ignoreTLS: true,
   },
@@ -80,7 +81,7 @@ var config = {
   weibo_id: 'your_weibo_id',
 
   // admin 可删除话题，编辑标签。把 user_login_name 换成你的登录名
-  admins: { user_login_name: true },
+  admins: { frank25184: true },
 
   // github 登陆的配置
   GITHUB_OAUTH: {
@@ -114,7 +115,7 @@ var config = {
     url: '/public/upload/'
   },
 
-  file_limit: '1MB',
+  file_limit: '2MB',
 
   // 版块
   tabs: [
@@ -137,7 +138,7 @@ var config = {
 };
 
 if (process.env.NODE_ENV === 'test') {
-  config.db = 'mongodb://127.0.0.1/node_club_test';
+  config.db = 'mongodb://127.0.0.1/discussion';
 }
 
 module.exports = config;
