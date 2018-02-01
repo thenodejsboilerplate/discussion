@@ -3,48 +3,62 @@
  */
 
 var path = require('path');
-
+let dbUsername = process.env.dbUsername
+let dbPassword = process.env.dbPassword
+let mongoPort = process.env.mongoPort || 27017
 var config = {
   // debug 为 true 时，用于本地调试
-  debug: true,
+  debug: false,
 
   get mini_assets() { return !this.debug; }, // 是否启用静态文件的合并压缩，详见视图中的Loader
 
-  name: '2HOURS', // 社区名字
-  description: 'Exclusive Place for expatriates in China', // 社区的描述
+  name: '2HOURS.CC', // 社区名字
+  description: '2HOURS: Exclusive for expatriates in China', // 社区的描述
   keywords: 'expatriates, foreigner, English teacher',
 
   // 添加到 html head 中的信息
   site_headers: [
     '<meta name="author" content="Frank Lee" />'
   ],
-  site_logo: '/public/images/cnodejs_light.svg', // default is `name`
-  site_icon: '/public/images/cnode_icon_32.png', // 默认没有 favicon, 这里填写网址
+  site_logo: '',//'/public/images/cnodejs_light.svg', // default is `name`
+  site_icon: '',//'/public/images/cnode_icon_32.png', // 默认没有 favicon, 这里填写网址
   // 右上角的导航区
   site_navs: [
     // 格式 [ path, title, [target=''] ]
-    [ '/about', 'about' ]
+    [ '/about', 'About' ]
   ],
   // cdn host，如 http://cnodejs.qiniudn.com
   site_static_host: '', // 静态文件存储域名
   // 社区的域名
-  host: 'localhost',
+  host: 'localhost:3000',
   // 默认的Google tracker ID，自有站点请修改，申请地址：http://www.google.com/analytics/
   google_tracker_id: '',
   // 默认的cnzz tracker ID，自有站点请修改
   cnzz_tracker_id: '',
 
+  // // mongodb 配置
+  // db: 'mongodb://127.0.0.1/2hours',
   // mongodb 配置
-  db: 'mongodb://127.0.0.1/2hours',
-
+  mongo: {
+    port: mongoPort,
+   // uri: `mongodb://localhost:${mongoPort}/test`, // ?authSource=groupForum
+    options: {
+      user: dbUsername || '',
+      pass: dbPassword || '',
+      db: { reconnectTries: Number.MAX_VALUE },
+      server: {
+        poolSize: 20
+      }
+    }
+  },
   // redis 配置，默认是本地
   redis_host: '127.0.0.1',
   redis_port: 6379,
   redis_db: 0,
   redis_password: '',
 
-  session_secret: 'node_club_secret', // 务必修改
-  auth_cookie_name: 'node_club',
+  session_secret: 'iloveenen', // 务必修改
+  auth_cookie_name: 'loveenen',
 
   // 程序运行的端口
   port: 3000,
@@ -54,10 +68,10 @@ var config = {
 
   // RSS配置
   rss: {
-    title: '2HOURS.CC: Exclusive Space for expatriates in China',
+    title: '2HOURS.CC: Exclusive for expatriates',
     link: 'http://2hours.cc',
     language: 'en',
-    description: '2HOURS.CC: Exclusive Space for expatriates in China',
+    description: '2HOURS: Expats in China',
     //最多获取的RSS Item数量
     max_rss_items: 50
   },
@@ -67,13 +81,13 @@ var config = {
   // 邮箱配置
   mail_opts: {
     host: 'smtp.163.com',
-    port: 25,
-    //secure: true,
+    port: 465,//25,
+    secure: true,//false,
     auth: {
       user: 'dongwenedu@163.com',
       pass: '548331198'
     },
-    ignoreTLS: true,
+    ignoreTLS: true
   },
 
   //weibo app key
@@ -119,9 +133,9 @@ var config = {
 
   // 版块
   tabs: [
-    ['share', '分享'],
-    ['ask', '问答'],
-    ['job', '招聘'],
+    ['share', 'Share'],
+    ['ask', 'Ask'],
+    ['job', 'Job'],
   ],
 
   // 极光推送
