@@ -109,7 +109,7 @@ exports.index = function (req, res, next) {
         pages: pages,
         tabs: config.tabs,
         tab: tab,
-        pageTitle: tabName && (tabName + '版块'),
+        pageTitle: tabName && (tabName + ' Category'),
       });
     });
 };
@@ -136,7 +136,7 @@ exports.sitemap = function (req, res, next) {
           return next(err);
         }
         topics.forEach(function (topic) {
-          urlset.ele('url').ele('loc', 'http://cnodejs.org/topic/' + topic._id);
+          urlset.ele('url').ele('loc', 'http://2hours.cc/topic/' + topic._id);
         });
 
         var sitemapData = urlset.end();

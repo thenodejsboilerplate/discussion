@@ -40,7 +40,7 @@ exports.index = function (req, res, next) {
         recent_topics: recent_topics,
         recent_replies: recent_replies,
         token: token,
-        pageTitle: util.format('@%s 的个人主页', user.loginname),
+        pageTitle: util.format('@%s \' personal page', user.loginname),
       });
     };
 
@@ -250,7 +250,7 @@ exports.listTopics = function (req, res, next) {
 
   User.getUserByLoginName(user_name, function (err, user) {
     if (!user) {
-      res.render404('这个用户不存在。');
+      res.render404('The user doesn\'t exist!');
       return;
     }
 
@@ -285,7 +285,7 @@ exports.listReplies = function (req, res, next) {
 
   User.getUserByLoginName(user_name, function (err, user) {
     if (!user) {
-      res.render404('这个用户不存在。');
+      res.render404('The user doesn\'t exist!');
       return;
     }
 
