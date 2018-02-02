@@ -1,0 +1,32 @@
+{
+    "name"        : "discussion",
+    "script"      : "./app.js",
+    "cwd"         : "./",
+    // "watch": [
+    //   "bin",
+    //   "src"
+    // ],
+    "ignore_watch" : [
+      "node_modules", 
+      "logs",
+      "public",
+      "test",
+      "History.md"
+    ],
+    "max_restarts"     : 15,
+    "error_file" : "./logs/app-err.log",
+    "out_file"   : "./logs/app-out.log",
+    "env": {
+        "NODE_ENV": "production",
+        "dbUsername": "franklee",
+        "dbPassword": "548331198",
+        "MongoPort": 27017,
+        "PORT": 3000
+    },
+    "env_dev": {
+        "NODE_ENV": "development"
+    },
+    "env_test": {
+        "NODE_ENV": "test"
+    }
+  }
