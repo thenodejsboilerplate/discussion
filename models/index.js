@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var config   = require('../config');
 var logger = require('../common/logger')
 var mongodb = config.mongo;
-mongoose.connect(`mongodb://${mongodb.options.user}:${mongodb.options.pass}@localhost:${mongodb.port}/2hours?authSource=2hours`, function (err) {
+mongoose.connect(`mongodb://${mongodb.options.user}:${mongodb.options.pass}@localhost:${mongodb.port}/2hours?authSource=admin`, function (err) {
   if (err) {
     logger.error('connect to %s error: ', mongodb, err.message)
     process.exit(1)
