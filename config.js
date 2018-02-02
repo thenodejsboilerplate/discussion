@@ -154,6 +154,7 @@ var config = {
 if (process.env.NODE_ENV === 'test') {
   config.mongo = {
     port: 27017,
+    uri: `mongodb://localhost:${mongoPort}/2hours?authSource=admin`,
     // uri: `mongodb://localhost:${mongoPort}/test`, // ?authSource=groupForum
      options: {
        user: dbUsername || '',
