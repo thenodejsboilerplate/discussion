@@ -152,7 +152,20 @@ var config = {
 };
 
 if (process.env.NODE_ENV === 'test') {
-  config.db = 'mongodb://127.0.0.1/discussion';
+  config.mongo = {
+    port: 27017,
+    // uri: `mongodb://localhost:${mongoPort}/test`, // ?authSource=groupForum
+     options: {
+       user: dbUsername || '',
+       pass: dbPassword || '',
+       db: { reconnectTries: Number.MAX_VALUE },
+       server: {
+         poolSize: 20
+       }
+     }    
+  }
+  
+  //'mongodb://127.0.0.1/discussion';
 }
 
 module.exports = config;

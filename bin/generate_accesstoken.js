@@ -4,10 +4,11 @@
 var uuid = require('node-uuid');
 var mongoose = require('mongoose');
 var config = require('../config');
+var mongodb = config.mongo;
 var async = require('async');
 require('../models/user');
 
-mongoose.connect(config.db, function (err) {
+mongoose.connect(`mongodb://${mongodb.options.user}:${mongodb.options.pass}@localhost:${mongodb.port}/2hours?authSource=admin`, function (err) {
   if (err) {
     console.error('connect to %s error: ', config.db, err.message);
     process.exit(1);
