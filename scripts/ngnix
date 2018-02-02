@@ -1,0 +1,9 @@
+#!/bin/bash
+# clear: if you want to clear the above info in the command
+echo "copying the nignix folders and files..."
+mkdir /etc/nginx/sites-available
+mkdir /etc/nginx/sites-enabled
+cp -pr /apps/discussion/ngnix/* /etc/nginx
+# Create a symbolic link between sites-available and sites-enabled
+ln -s /etc/nginx/sites-available/2hours.cc.conf /etc/nginx/sites-enabled/2hours.cc.conf
+service nginx restart
